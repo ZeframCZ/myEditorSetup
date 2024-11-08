@@ -20,6 +20,9 @@ scoop install luarocks
 install lua 5.1 ->
 https://ultahost.com/knowledge-base/install-lua-on-windows/
 
+pip3 install pynvim
+
+
 
 https://www.lazyvim.org/installation
 
