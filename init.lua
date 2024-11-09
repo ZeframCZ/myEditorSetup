@@ -2,6 +2,19 @@ vim.cmd("set ruler")
 vim.cmd("let g:loaded_perl_provider = 0")
 vim.fn.setenv("CC", "gcc")
 
+vim.cmd("set number")
+
+vim.cmd("set showmatch")
+
+vim.cmd("set keymodel=startsel,stopsel")
+
+
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+local vopts = { noremap = true, silent = true, expr = true }
+
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
