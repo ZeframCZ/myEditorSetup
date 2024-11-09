@@ -22,6 +22,7 @@ https://ultahost.com/knowledge-base/install-lua-on-windows/
 
 pip3 install pynvim
 
+choco install mingw
 
 
 https://www.lazyvim.org/installation
