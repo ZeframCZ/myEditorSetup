@@ -19,6 +19,7 @@ vim.api.nvim_set_keymap('v', 'k', 'h', opts)
 vim.api.nvim_set_keymap('v', 'l', 'j', opts)
 vim.api.nvim_set_keymap('v', 'o', 'k', opts)
 vim.api.nvim_set_keymap('v', 'ĹŻ', 'l', opts)
+-- Move in normal mode with "kloĹŻ"
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -53,7 +54,9 @@ local plugins = {
 	{"hrsh7th/cmp-nvim-lsp"},
 	{"saadparwaiz1/cmp_luasnip"},
 	{'L3MON4D3/LuaSnip'},
-	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }}
+	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }},
+	{'nvim-lualine/lualine.nvim',dependencies = { 'nvim-tree/nvim-web-devicons' }},
+	{"nvim-tree/nvim-tree.lua",version = "*",lazy = false,dependencies = {"nvim-tree/nvim-web-devicons"}}
 	
 }
 local opts = {}
@@ -155,3 +158,17 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+
+require('lualine').setup()
+require("nvim-tree").setup()
+vim.api.nvim_set_keymap('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+-- When in Tree
+--  "a" = create file
+--  "d" = delete file
+--  "r" = rename file
+--  "enter" = open 
+--  "q" = close
+--  "x" = cut file
+--  "p" = paste file
+--  "Ctrl+b" = toggle the tree
