@@ -6,13 +6,19 @@ vim.cmd("set number")
 
 vim.cmd("set showmatch")
 
-vim.cmd("set keymodel=startsel,stopsel")
+-- vim.cmd("set keymodel=startsel,stopsel")
 
-
-local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-local vopts = { noremap = true, silent = true, expr = true }
 
+vim.api.nvim_set_keymap('n', 'k', 'h', opts)
+vim.api.nvim_set_keymap('n', 'l', 'j', opts)
+vim.api.nvim_set_keymap('n', 'o', 'k', opts)
+vim.api.nvim_set_keymap('n', 'ĹŻ', 'l', opts)
+
+vim.api.nvim_set_keymap('v', 'k', 'h', opts)
+vim.api.nvim_set_keymap('v', 'l', 'j', opts)
+vim.api.nvim_set_keymap('v', 'o', 'k', opts)
+vim.api.nvim_set_keymap('v', 'ĹŻ', 'l', opts)
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -46,12 +52,14 @@ local plugins = {
 	{'neovim/nvim-lspconfig',dependencies = {{'hrsh7th/nvim-cmp'},{'j-hui/fidget.nvim', opts = {} }}},
 	{"hrsh7th/cmp-nvim-lsp"},
 	{"saadparwaiz1/cmp_luasnip"},
-	{'L3MON4D3/LuaSnip'}
-		
+	{'L3MON4D3/LuaSnip'}		
 }
 local opts = {}
 
+
 require("lazy").setup(plugins, opts)
+
+
 require("catppuccin").setup()
 vim.cmd.colorscheme "catppuccin"
 
