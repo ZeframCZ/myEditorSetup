@@ -56,8 +56,9 @@ local plugins = {
 	{'L3MON4D3/LuaSnip'},
 	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }},
 	{'nvim-lualine/lualine.nvim',dependencies = { 'nvim-tree/nvim-web-devicons' }},
-	{"nvim-tree/nvim-tree.lua",version = "*",lazy = false,dependencies = {"nvim-tree/nvim-web-devicons"}}
-	
+	{"nvim-tree/nvim-tree.lua",version = "*",lazy = false,dependencies = {"nvim-tree/nvim-web-devicons"}},
+	{ "nvzone/volt" , lazy = true },
+	{ "nvzone/menu" , lazy = true }
 }
 local opts = {}
 
@@ -172,3 +173,16 @@ vim.api.nvim_set_keymap('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, s
 --  "x" = cut file
 --  "p" = paste file
 --  "Ctrl+b" = toggle the tree
+
+-- Keyboard users
+vim.keymap.set("n", "<C-t>", function()
+  require("menu").open("default")
+end, {})
+
+-- mouse users + nvimtree users!
+vim.keymap.set("n", "<RightMouse>", function()
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options, { mouse = true })
+end, {})
