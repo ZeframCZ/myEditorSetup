@@ -1,27 +1,53 @@
+-- ------------------ --
+-- NeoVim Config file --
+-- ------------------ --
+-- Catppuccin theme
+-- Treesitter, CMP, LSP, Luasnip
+-- Telescope
+-- Lualine
+-- Tree (file tree)
+-- Menu
+-- Alpha (startify)
+
+-- ------------------ --
+-- Usefull Key binds  --
+-- ------------------ --
+-- When in Tree
+--  "a" = create file
+--  "d" = delete file
+--  "r" = rename file
+--  "enter" = open 
+--  "q" = close
+--  "x" = cut file
+--  "p" = paste file
+--  "Ctrl+b" = toggle the tree
+-- Telescope
+--  "<space> ff" = find file
+--  "<space> fg" = live grep
+
+
+
 vim.cmd("set ruler")
 vim.cmd("let g:loaded_perl_provider = 0")
 vim.fn.setenv("CC", "gcc")
-
 vim.cmd("set number")
-
 vim.cmd("set showmatch")
 
 -- vim.cmd("set keymodel=startsel,stopsel")
 
 local opts = { noremap = true, silent = true }
 
+-- Move in normal mode with "kloĹŻ"
 vim.api.nvim_set_keymap('n', 'k', 'h', opts)
 vim.api.nvim_set_keymap('n', 'l', 'j', opts)
 vim.api.nvim_set_keymap('n', 'o', 'k', opts)
 vim.api.nvim_set_keymap('n', 'ĹŻ', 'l', opts)
-
 vim.api.nvim_set_keymap('v', 'k', 'h', opts)
 vim.api.nvim_set_keymap('v', 'l', 'j', opts)
 vim.api.nvim_set_keymap('v', 'o', 'k', opts)
 vim.api.nvim_set_keymap('v', 'ĹŻ', 'l', opts)
--- Move in normal mode with "kloĹŻ"
 
-
+-- Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -44,7 +70,9 @@ vim.diagnostic.config({
 	update_in_insert = true
 })
 
-
+-- ---------------- --
+-- Download plugins --
+-- ---------------- --
 local plugins = {
 	{"catppuccin/nvim", name = "catppuccin", priority = 1000},
 	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
@@ -57,19 +85,19 @@ local plugins = {
 	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }},
 	{'nvim-lualine/lualine.nvim',dependencies = { 'nvim-tree/nvim-web-devicons' }},
 	{"nvim-tree/nvim-tree.lua",version = "*",lazy = false,dependencies = {"nvim-tree/nvim-web-devicons"}},
-	{ "nvzone/volt" , lazy = true },
-	{ "nvzone/menu" , lazy = true }
+	{"nvzone/volt" , lazy = true },
+	{"nvzone/menu" , lazy = true },
+	{'goolord/alpha-nvim', dependencies = { 'echasnovski/mini.icons' }}
 }
 local opts = {}
 
 
+-- ------------- --
+-- Setup plugins --
+-- ------------- --
 require("lazy").setup(plugins, opts)
-
-
 require("catppuccin").setup()
 vim.cmd.colorscheme "catppuccin"
-
-
 local ts_configs = require("nvim-treesitter.configs")
 ts_configs.setup({
           ensure_installed = {"python", "c", "lua"},
@@ -77,8 +105,6 @@ ts_configs.setup({
           highlight = { enable = true },
           indent = { enable = true },  
         })
-
-
 require("nvim-lsp-installer").setup {
 	automatic_installation = true,
 	ui = {
@@ -89,10 +115,6 @@ require("nvim-lsp-installer").setup {
         }
     }
 }
-
-
-
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -152,8 +174,6 @@ cmp.setup {
   },
 }
 
-
-
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
@@ -164,15 +184,6 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 require('lualine').setup()
 require("nvim-tree").setup()
 vim.api.nvim_set_keymap('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
--- When in Tree
---  "a" = create file
---  "d" = delete file
---  "r" = rename file
---  "enter" = open 
---  "q" = close
---  "x" = cut file
---  "p" = paste file
---  "Ctrl+b" = toggle the tree
 
 -- Keyboard users
 vim.keymap.set("n", "<C-t>", function()
@@ -186,3 +197,5 @@ vim.keymap.set("n", "<RightMouse>", function()
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
 end, {})
+
+require'alpha'.setup(require'alpha.themes.startify'.config)
