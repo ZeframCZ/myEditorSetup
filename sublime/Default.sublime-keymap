@@ -1,8 +1,13 @@
 [
-    { "keys": ["shift+enter"], "command": "build" },
-    { "keys": ["ctrl+b"], "command": "toggle_side_bar" },
-    { "keys": ["ctrl+shift+b"], "command": "build" },
-    { "keys": ["alt+up"], "command": "swap_line_up" },
-    { "keys": ["alt+down"], "command": "swap_line_down" },
-    { "keys": ["alt+shift+i"], "command": "split_selection_into_lines" }
+{ "keys": ["shift+enter"], "command": "build" },
+{ "keys": ["shift+escape"], "command": "cancel_build" },
+{ "keys": ["ctrl+b"], "command": "toggle_side_bar" },
+{ "keys": ["ctrl+shift+b"], "command": "build" },
+{ "keys": ["alt+up"], "command": "swap_line_up" },
+{ "keys": ["alt+down"], "command": "swap_line_down" },
+{ "keys": ["alt+shift+i"], "command": "split_selection_into_lines" },
+{ "keys": ["ctrl+shift+up"], "command": "select_lines", "args": {"forward": false} },
+{ "keys": ["ctrl+shift+down"], "command": "select_lines", "args": {"forward": true} },
+{ "keys": ["ctrl+alt+up"], "command": "swap_line_up" },
+{ "keys": ["ctrl+alt+down"], "command": "swap_line_down" }
 ]
