@@ -1,4 +1,5 @@
 {
+    "chat.disableAIFeatures": true
     "python.defaultInterpreterPath": "C:\\Users\\haha\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
